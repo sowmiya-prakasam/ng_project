@@ -1,0 +1,55 @@
+<form class="w-25 mx-auto border border-secondary p-3  mt-5 " [formGroup]="signupForm" (ngSubmit)="OnSubmit()" style="background-color: aliceblue;">
+  <div class="alert alert-danger" *ngIf="isAuthenticationFailed">   
+    User Allready exists login
+    <a [routerLink]="['/login']" class="d-block ">login</a>
+  </div>
+  <div class="mb-3 formGroup">
+    <label for="name" class="form-label">Name</label>
+    <input type="email" class="form-control" id="name"  formControlName="name" [ngClass] = "{'is-valid':f['name'].valid && f['name'].touched,'is-invalid':f['name'].touched &&f['name'].invalid}">
+    <div class="text-danger mt-2" [hidden]="!(f['name'].dirty && f['name'].errors?.['required'])">
+      Enter Name
+</div>
+  </div>
+
+  <div class="mb-3 formGroup">
+    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email" [ngClass] = "{'is-valid':f['email'].valid && f['email'].touched,'is-invalid':f['email'].touched &&f['email'].invalid}">
+    <div class="text-danger mt-2" [hidden]="!(f['email'].dirty && f['email'].errors?.['required'])">
+      Enter a valid email
+</div>
+    </div>
+  <div class="mb-3 formGroup">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" formControlName="password" [ngClass] = "{'is-valid':f['password'].valid && f['password'].touched,'is-invalid':f['password'].touched &&f['password'].invalid}">
+    <div class="text-red-400 text-sm" *ngIf="f['password'].dirty">
+      <span class="block" [ngClass]="{'text-primary': f['password'].value?.match('^(?=.*[A-Z])')}">At least oneu ppercase
+                              letter.</span>
+      <span class="block" [ngClass]="{'text-primary': f['password'] .value?.match('(?=.*[a-z])')}">At least one lowercase
+                              letter.</span>
+      <span class="block" [ngClass]="{'text-primary': f['password'].value?.match('(.*[0-9].*)')}">At least one
+                              digit.</span>
+      <span class="block" [ngClass]="{'text-primary': f['password'].value?.match('(?=.*[!@#$%^&*])')}">At least one
+                              special
+                              character.</span>
+      <span class="block" [ngClass]="{'text-primary': f['password'].value?.match('.{8,}')}">At least 8 characters
+                              long.</span>
+   </div>
+   <div class="text-danger mt-2" [hidden]="!(f['password'].dirty && f['password'].errors?.['required'])">
+    Password is required
+</div>
+  </div>
+  <div class="mb-3 formGroup">
+    <label for="mbno" class="form-label">Mobile No</label>
+    <input type="number" class="form-control" id="mobno" formControlName="mobno" [ngClass]="{'is-valid': f['mobno'].valid && f['mobno'].touched, 'is-invalid': f['mobno'].touched && f['mobno'].invalid}">
+     
+  </div>  
+  
+  <div class="d-flex justify-content-between ">
+    <button type="submit" class="btn btn-dark justify-content-center" [disabled]="this.signupForm.invalid">Submit
+    </button>
+    <div  *ngIf="isAuthenticationFailed">
+      <a [routerLink]="['/login']" class="d-block ">login</a>
+    </div>
+    
+  </div>
+</form>

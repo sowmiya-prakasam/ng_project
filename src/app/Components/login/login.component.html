@@ -1,0 +1,31 @@
+<form class="w-25 mx-auto mt-5 border border-secondary p-3 "[formGroup] = "loginForm" (ngSubmit)="OnSubmit()" style="background-color: aliceblue;">
+  <div class="alert alert-danger" *ngIf="isAuthentication">
+    invalid credentials
+  </div>
+  <div class="mb-3 " >
+    <label for="Email1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="Email" formControlName = "email" [ngClass] = "{'is-valid':f['email'].valid && f['email'].touched,'is-invalid':f['email'].touched && f['email'].invalid}">
+    <div class="text-danger mt-2" [hidden]="!(f['email'].dirty && f['email'].errors?.['required'])">
+      Enter a valid email
+</div>
+  </div>
+  <div class="mb-3 ">
+    <label for="Password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="Password" formControlName = "password" [ngClass] = "{'is-valid':f['password'].valid && f['password'].touched,'is-invalid':f['password'].touched && f['password'].invalid}">
+    <div class="text-red-400 text-sm" *ngIf="f['password'].dirty">
+    </div>
+   <div class="text-danger mt-2" [hidden]="!(f['password'].dirty && f['password'].errors?.['required'])">
+    Password is required
+</div>
+  </div>
+  <div class="d-flex justify-content-between " >
+    <button type="submit" class="btn btn-dark " [disabled]="this.loginForm.invalid">Submit</button>
+    <div >
+      <a [routerLink]="['/signup']" class="d-block ">signup</a>
+      <a [routerLink]="['/forget']" class="d-block ">Forget Password?</a>
+      
+    </div>
+    
+  </div>
+  
+</form>
